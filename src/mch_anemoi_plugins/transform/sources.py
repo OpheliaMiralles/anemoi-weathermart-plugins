@@ -4,6 +4,7 @@ from itertools import chain
 from typing import Any
 from typing import Dict
 from typing import List
+from typing import Tuple
 from typing import Union
 
 import numpy as np
@@ -16,13 +17,13 @@ from anemoi.datasets.create.sources.xarray_support.flavour import CoordinateGues
 from anemoi.datasets.create.sources.xarray_support.time import Time
 from anemoi.datasets.create.sources.xarray_support.variable import Variable
 from anemoi.datasets.dates.groups import GroupOfDates
-from data_provider import DataProvider
-from data_provider.default_provider import all_retrievers
-from data_provider.default_provider import default_provider
-from data_provider.utils import read_file
 from pyproj import CRS
-from typing import Tuple
 from pyproj import Transformer
+from weathermart import DataProvider
+from weathermart.default_provider import available_retrievers
+from weathermart.default_provider import default_provider
+from weathermart.utils import read_file
+
 
 def reproject(
     x_coords: Union[np.ndarray, List],
@@ -33,8 +34,9 @@ def reproject(
     transformer = Transformer.from_crs(src_crs, dst_crs, always_xy=True)
     return transformer.transform(x_coords, y_coords)
 
-def get_all_data_provider_sources() -> List[str]:
-    return list(set(chain.from_iterable(r.sources for r in all_retrievers())))
+
+def get_all_available_sources() -> List[str]:
+    return list(set(chain.from_iterable(r.sources for r in available_retrievers())))
 
 
 def assign_lonlat(array: xr.DataArray, crs: str) -> xr.DataArray:
@@ -249,7 +251,7 @@ class CustomFieldList(XarrayFieldList):
 
 
 def check_indexing(data: xr.Dataset, time_dim: str) -> xr.Dataset:
-    """ Helpers function to check and remove unsupported coordinates and dimensions. 
+    """Helpers function to check and remove unsupported coordinates and dimensions.
     In particular, in the case of analysis data from gridefix, 1 lead time of 0 is provided as a coord, while the forecast_reference_time is the time dimension. However, anemoi does not support lead_time as a coordinate if only one value is provided (the ndarray of lead times has dim 0). We remove lead_time and set the time dimension to forecast_reference_time.
     Otherwise, observation data is indexed by time, and forecast data by forecast_reference_time and lead_time, which anemoi supports."""
     potentially_misleading_coords = [
@@ -376,26 +378,16 @@ def get_all_source_classes(source_names: list[str]) -> dict[str, type]:
     return {name: make_source_class(name) for name in source_names}
 
 
-source_names = get_all_data_provider_sources()
+source_names = get_all_available_sources()
 source_classes = get_all_source_classes(source_names)
 # This will print the source class definitions
 # Still have to execute this code to make sure the classes are created and available for the pyproject
-print(
-    "\n".join(
-        f'{name.replace("-", "_")} = make_source_class("{name}")'
-        for name in source_names
-    )
-)
-COSMO_1E = make_source_class("COSMO-1E")
-INCA = make_source_class("INCA")
-OPERA = make_source_class("OPERA")
-GEOSATCLIM = make_source_class("GEOSATCLIM")
-KENDA_CH1 = make_source_class("KENDA-CH1")
-RADAR = make_source_class("RADAR")
+print("\n".join(f'{name.replace("-", "_")} = make_source_class("{name}")' for name in source_names))
+
 DHM25 = make_source_class("DHM25")
-CEDTM = make_source_class("CEDTM")
-CMSAF = make_source_class("CMSAF")
-SATELLITE = make_source_class("SATELLITE")
+OPERA = make_source_class("OPERA")
 NASADEM = make_source_class("NASADEM")
-ICON_CH1_EPS = make_source_class("ICON-CH1-EPS")
+SATELLITE = make_source_class("SATELLITE")
 SURFACE = make_source_class("SURFACE")
+ICON_CH1_EPS = make_source_class("ICON-CH1-EPS")
+KENDA_CH1 = make_source_class("KENDA-CH1")

@@ -21,7 +21,7 @@ dependencies = [
     "cf-units>=3.2.0,<4",
     "earthkit>=0.10.0",
     "eccodes>=2.38.3",
-    "data-provider>=1.0",
+    "weathermart",
     "meteodata-lab>=0.2.0",
 ]
 
@@ -30,16 +30,12 @@ dependencies = [
 mch-anemoi-plugins = "mch_anemoi_plugins:main"
 
 [project.entry-points."anemoi.datasets.sources"]
-cosmo1e = "mch_anemoi_plugins.transform.sources:COSMO_1E"
-inca = "mch_anemoi_plugins.transform.sources:INCA"
-iconCH1 = "mch_anemoi_plugins.transform.sources:ICON_CH1_EPS"
-kendaCH1 = "mch_anemoi_plugins.transform.sources:KENDA_CH1"
 station = "mch_anemoi_plugins.transform.sources:SURFACE"
-radar = "mch_anemoi_plugins.transform.sources:RADAR"
 satellite = "mch_anemoi_plugins.transform.sources:SATELLITE"
 dem = "mch_anemoi_plugins.transform.sources:NASADEM"
-geosatclim = "mch_anemoi_plugins.transform.sources:GEOSATCLIM"
 opera = "mch_anemoi_plugins.transform.sources:OPERA"
+iconCH1 = "mch_anemoi_plugins.transform.sources:ICON_CH1_EPS"
+kendaCH1 = "mch_anemoi_plugins.transform.sources:KENDA_CH1"
 
 [project.entry-points."anemoi.transform.filters"]
 project = "mch_anemoi_plugins.transform.filters:Project"
@@ -77,7 +73,8 @@ anemoi-plugins = { git = "https://github.com/ecmwf/anemoi-plugins.git" }
 anemoi-datasets = { git = "https://github.com/ecmwf/anemoi-datasets.git"}
 anemoi-transform = { git = "https://github.com/ecmwf/anemoi-transform.git" }
 meteodata-lab = { git = "https://github.com/MeteoSwiss/meteodata-lab.git"}
-data-provider = {git = "https://github.com/MeteoSwiss/data-provider.git"}
+weathermart = {git = "https://github.com/MeteoSwiss/weathermart.git"}
+
 
 [[tool.uv.index]]
 name = "pypi-mch"
