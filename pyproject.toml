@@ -1,9 +1,9 @@
 [project]
-name = "mch-anemoi-plugins"
+name = "anemoi-weathermart-plugins"
 version = "0.1.0"
-description = "Package providing custom sources and filters for Anemoi."
+description = "Package connecting custom sources to anemoi-datasets interface."
 readme = "README.rst"
-authors = [{ name = "MeteoSwiss" }]
+authors = [{ name = "Ophélia Miralles" }]
 requires-python = ">=3.11"
 dependencies = [
     "anemoi-datasets",
@@ -13,43 +13,22 @@ dependencies = [
     "pandas",
     "xarray",
     "zarr",
-    "geopandas",
     "dask",
-    "rioxarray",
     "pyyaml",
     "omegaconf>=2.3.0,<3",
-    "cf-units>=3.2.0,<4",
-    "earthkit>=0.10.0",
-    "eccodes>=2.38.3",
     "weathermart",
-    "meteodata-lab>=0.2.0",
 ]
 
 
 [project.scripts]
-mch-anemoi-plugins = "mch_anemoi_plugins:main"
+anemoi-weathermart-plugins = "anemoi_weathermart_plugins:main"
 
 [project.entry-points."anemoi.datasets.sources"]
-station = "mch_anemoi_plugins.transform.sources:SURFACE"
-satellite = "mch_anemoi_plugins.transform.sources:SATELLITE"
-dem = "mch_anemoi_plugins.transform.sources:NASADEM"
-opera = "mch_anemoi_plugins.transform.sources:OPERA"
-iconCH1 = "mch_anemoi_plugins.transform.sources:ICON_CH1_EPS"
-kendaCH1 = "mch_anemoi_plugins.transform.sources:KENDA_CH1"
+station = "anemoi_weathermart_plugins.transform.sources:SURFACE"
+satellite = "anemoi_weathermart_plugins.transform.sources:SATELLITE"
+dem = "anemoi_weathermart_plugins.transform.sources:NASADEM"
+opera = "anemoi_weathermart_plugins.transform.sources:OPERA"
 
-[project.entry-points."anemoi.transform.filters"]
-project = "mch_anemoi_plugins.transform.filters:Project"
-interp2res = "mch_anemoi_plugins.transform.filters:Interp2Res"
-interp2grid = "mch_anemoi_plugins.transform.filters:Interp2Grid"
-uv2dirspeed = "mch_anemoi_plugins.transform.filters:UV2Dirspeed"
-dirspeed2uv = "mch_anemoi_plugins.transform.filters:Dirspeed2UV"
-q2dewpoint = "mch_anemoi_plugins.transform.filters:Q2Dewpoint"
-destagger = "mch_anemoi_plugins.transform.filters:HorizontalDestagger"
-
-[project.optional-dependencies]
-gridefix = [
-    "gridefix-process>=3.0.2",
-]
 
 [build-system]
 requires = ["hatchling"]
@@ -72,8 +51,7 @@ dependencies = [
 anemoi-plugins = { git = "https://github.com/ecmwf/anemoi-plugins.git" }
 anemoi-datasets = { git = "https://github.com/ecmwf/anemoi-datasets.git"}
 anemoi-transform = { git = "https://github.com/ecmwf/anemoi-transform.git" }
-meteodata-lab = { git = "https://github.com/MeteoSwiss/meteodata-lab.git"}
-weathermart = {git = "https://github.com/MeteoSwiss/weathermart.git"}
+weathermart = {git = "https://github.com/OpheliaMiralles/weathermart.git"}
 
 
 [[tool.uv.index]]

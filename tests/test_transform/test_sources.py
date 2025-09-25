@@ -3,7 +3,7 @@ import pytest
 from anemoi.datasets.create import Init
 from data_provider.default_provider import all_retrievers
 
-from mch_anemoi_plugins.transform.sources import DataProviderSource
+from anemoi_weathermart_plugins.transform.sources import DataProviderSource
 
 all_entrypoints = entrypoints.get_group_all("anemoi.datasets.sources")
 all_sources = [e.name for e in all_entrypoints]
@@ -16,11 +16,7 @@ example_variable["satellite"] = (
     "IR_039"  # satellite data exist for GridefixRetriever so the  ifirst variable is air_temperature
 )
 source_kwargs = {
-    "cosmo1e": {"through": "gridefix"},
     "satellite": {"through": "eumetsat"},
-    "iconCH1": {"through": "balfrin", "datatype": "forecast", "step_hours": [0, 6, 12]},
-    "kendaCH1": {"through": "balfrin"},
-    "station": {"storage_key": "sruc"},
 }
 
 
