@@ -382,7 +382,12 @@ source_names = get_all_available_sources()
 source_classes = get_all_source_classes(source_names)
 # This will print the source class definitions
 # Still have to execute this code to make sure the classes are created and available for the pyproject
-print("\n".join(f'{name.replace("-", "_")} = make_source_class("{name}")' for name in source_names))
+print(
+    "\n".join(
+        f'{name.replace("-", "_")} = make_source_class("{name}")'
+        for name in source_names
+    )
+)
 
 DHM25 = make_source_class("DHM25")
 OPERA = make_source_class("OPERA")
