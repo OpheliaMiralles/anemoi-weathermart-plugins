@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
@@ -12,7 +12,7 @@ repos:
       - id: no-commit-to-branch
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.2
+    rev: v0.14.3
     hooks:
       - id: ruff
         args: [--fix]
@@ -39,7 +39,7 @@ repos:
       - id: python-no-log-warn
 
   - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+    rev: 7.0.0
     hooks:
       - id: isort
         args:
@@ -50,12 +50,12 @@ repos:
           - black
 
   - repo: https://github.com/sphinx-contrib/sphinx-lint
-    rev: v1.0.0
+    rev: v1.0.1
     hooks:
       - id: sphinx-lint
 
   - repo: https://github.com/jshwi/docsig
-    rev: v0.65.0
+    rev: v0.71.0
     hooks:
       - id: docsig
         args:
