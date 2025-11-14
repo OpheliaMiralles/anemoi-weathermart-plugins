@@ -4,7 +4,7 @@ Collection of [anemoi plugins](https://anemoi.readthedocs.io/projects/plugins/en
 
 This package bridges:
 
-- sources accessible from **[weathermart](https://github.com/OpheliaMiralles/weathermart)** to **anemoi.sources**.  
+- sources accessible from **[weathermart](https://github.com/OpheliaMiralles/weathermart)** to **anemoi.sources**.
   As of now, sources that you can write in a YAML file are the following:
   - numerical weather prediction analyses or forecasts from *any GRIB archive*;
   - topography: `nasadem`, `cedtm`, and `dhm25` using URL requests from original sources;
