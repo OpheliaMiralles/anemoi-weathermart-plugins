@@ -2,7 +2,7 @@
 name = "anemoi-weathermart-plugins"
 version = "0.1.0"
 description = "Package connecting custom sources to anemoi-datasets interface."
-readme = "README.rst"
+readme = "README.md"
 authors = [{ name = "Ophélia Miralles" }]
 requires-python = ">=3.11"
 dependencies = [
@@ -24,11 +24,14 @@ dependencies = [
 anemoi-weathermart-plugins = "anemoi_weathermart_plugins:main"
 
 [project.entry-points."anemoi.datasets.sources"]
-station = "anemoi_weathermart_plugins.transform.sources:SURFACE"
 satellite = "anemoi_weathermart_plugins.transform.sources:SATELLITE"
 dem = "anemoi_weathermart_plugins.transform.sources:NASADEM"
 opera = "anemoi_weathermart_plugins.transform.sources:OPERA"
 
+[project.entry-points."anemoi.transform.filters"]
+interp2grid = "anemoi_weathermart_plugins.transform.filters:Interp2Grid"
+interp2res = "anemoi_weathermart_plugins.transform.filters:Interp2Res"
+interpNA = "anemoi_weathermart_plugins.transform.filters:InterpNAFilter"
 
 [build-system]
 requires = ["hatchling"]
