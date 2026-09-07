@@ -7,11 +7,11 @@ from .weathermart_sources import SATELLITE
 from .weathermart_sources import SURFACE
 
 __all__ = [
-    "ReaLCh1Precip",
+    "ICON_CH1",
+    "INCA",
     "NASADEM",
     "OPERA",
     "SATELLITE",
     "SURFACE",
-    "INCA",
-    "ICON_CH1",
+    "ReaLCh1Precip",
 ]
