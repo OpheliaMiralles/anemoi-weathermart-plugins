@@ -1,7 +1,7 @@
 import io
+from collections.abc import Callable
+from collections.abc import Iterator
 from copy import copy
-from typing import Callable
-from typing import Iterator
 
 import earthkit.data as ekd
 import numpy as np

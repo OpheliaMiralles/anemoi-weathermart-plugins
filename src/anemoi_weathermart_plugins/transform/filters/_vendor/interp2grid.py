@@ -10,17 +10,15 @@
 # Imports and typing
 # -----------------------------------------------------------------------------
 import json
+from collections.abc import Callable
 from collections.abc import Hashable
 from functools import wraps
 from logging import getLogger
 from math import ceil
 from math import prod
 from typing import Any
-from typing import Callable
 from typing import Literal
-from typing import Optional
 from typing import TypeVar
-from typing import Union
 from typing import cast
 
 import numpy as np
@@ -40,20 +38,20 @@ F = TypeVar("F", bound=Callable[..., Any])
 # -----------------------------------------------------------------------------
 # Constants and type aliases
 # -----------------------------------------------------------------------------
-_InterpMethods = Union[
-    Literal[
-        "idw",
-        "temp",
-        "temp_fixgrad",
-        "nearest_alt",
-        "snowlim",
-        "nearest_3D",
-        "linear_3D",
-        "idw_3D",
-        "upscaled",
-        "upscaled_3D",
-    ],
-    Literal["nearest", "linear", "cubic"],
+_InterpMethods = Literal[
+    "idw",
+    "temp",
+    "temp_fixgrad",
+    "nearest_alt",
+    "snowlim",
+    "nearest_3D",
+    "linear_3D",
+    "idw_3D",
+    "upscaled",
+    "upscaled_3D",
+    "nearest",
+    "linear",
+    "cubic",
 ]
 HEIGHT_METHODS = (
     "temp",
@@ -677,8 +675,8 @@ def _slice_coarsen(
     data: xr.Dataset,
     dst_grid: xr.Dataset,
     method: str,
-    spatial_dims: Optional[tuple[str, ...]] = None,
-    dst_spatial_dims: Optional[tuple[str, ...]] = None,
+    spatial_dims: tuple[str, ...] | None = None,
+    dst_spatial_dims: tuple[str, ...] | None = None,
     **kwargs: Any,
 ) -> xr.Dataset:
     def extra_buffer(ratio: int) -> int:
@@ -866,7 +864,7 @@ def _get_coarsen_ratio(
     dst_grid: xr.Dataset,
     dst_spatial_dims: tuple[str, str],
     dst_coords_crs: tuple[str, str, CRS],
-    res: Optional[float] = None,
+    res: float | None = None,
 ) -> tuple[int, int]:
     if res is not None:
         res_src_x = res_src_y = res

@@ -9,13 +9,13 @@ from .omega_from_w import OmegaFromW
 from .vertical_interpolation import InterpK2P
 
 __all__ = [
+    "AssignGrid",
     "ClipLateralBoundaries",
     "Destagger",
-    "AssignGrid",
-    "InterpK2P",
-    "Interp2Grid",
-    "InterpNAFilter",
-    "Interp2Res",
-    "OmegaFromW",
     "GeopotentialFromHeight",
+    "Interp2Grid",
+    "Interp2Res",
+    "InterpK2P",
+    "InterpNAFilter",
+    "OmegaFromW",
 ]
