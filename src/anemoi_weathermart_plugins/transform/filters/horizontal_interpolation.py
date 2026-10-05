@@ -1,5 +1,4 @@
 import re
-from typing import Union
 
 import numpy as np
 import xarray as xr
@@ -38,7 +37,7 @@ def merge_fieldlist(field_array: FieldArray) -> xr.Dataset:
 
 
 def _interp2grid(
-    array: xr.Dataset, example_field, template: Union[xr.Dataset, str]
+    array: xr.Dataset, example_field, template: xr.Dataset | str
 ) -> xr.Dataset:
     time_dim = (
         "time"
@@ -95,7 +94,7 @@ def _interp_na(array: xr.Dataset, param: str) -> xr.Dataset:
 
 
 def _interp2res(
-    array: xr.Dataset, example_field, resolution: Union[str, int], target_crs=None
+    array: xr.Dataset, example_field, resolution: str | int, target_crs=None
 ) -> xr.Dataset:
     point_dim = (
         "cell"
@@ -179,7 +178,7 @@ class BaseXarrayFilter(Filter):
 class Interp2Grid(BaseXarrayFilter):
     """Interpolate fields to a target grid."""
 
-    def __init__(self, template: Union[xr.Dataset, str]):
+    def __init__(self, template: xr.Dataset | str):
         self.template = template
 
     def apply_filter(self, ds: xr.Dataset, example_field) -> xr.Dataset:
@@ -199,7 +198,7 @@ class InterpNAFilter(BaseXarrayFilter):
 class Interp2Res(BaseXarrayFilter):
     """Interpolate fields to a target resolution."""
 
-    def __init__(self, resolution: Union[str, int], target_crs: str = None):
+    def __init__(self, resolution: str | int, target_crs: str = None):
         self.resolution = resolution
         self.target_crs = target_crs
 
